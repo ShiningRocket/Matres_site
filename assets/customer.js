@@ -24,13 +24,13 @@ class CustomerAddresses {
     const container = document.querySelector(selectors.customerAddresses);
     return container
       ? {
-          container,
-          addressContainer: container.querySelector(selectors.addressContainer),
-          toggleButtons: document.querySelectorAll(selectors.toggleAddressButton),
-          cancelButtons: container.querySelectorAll(selectors.cancelAddressButton),
-          deleteButtons: container.querySelectorAll(selectors.deleteAddressButton),
-          countrySelects: container.querySelectorAll(selectors.addressCountrySelect),
-        }
+        container,
+        addressContainer: container.querySelector(selectors.addressContainer),
+        toggleButtons: document.querySelectorAll(selectors.toggleAddressButton),
+        cancelButtons: container.querySelectorAll(selectors.cancelAddressButton),
+        deleteButtons: container.querySelectorAll(selectors.deleteAddressButton),
+        countrySelects: container.querySelectorAll(selectors.addressCountrySelect),
+      }
       : {};
   }
 
@@ -82,32 +82,32 @@ class CustomerAddresses {
 }
 
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
   const dropdownTrigger = document.querySelector('.dropdown-trigger');
   const dropdownContent = document.querySelector('.dropdown-content');
   const dropdownItems = document.querySelectorAll('.dropdown-content li');
   const selectedOption = document.querySelector('.selected-option');
   const selectedPrice = document.querySelector('.selected-price');
   const product = document.getElementById('custom_product');
-  
-  dropdownTrigger.addEventListener('click', function(e) {
+
+  dropdownTrigger.addEventListener('click', function (e) {
     e.stopPropagation();
     const isActive = dropdownContent.classList.contains('active');
-    
+
     closeAllDropdowns();
-    
+
     if (!isActive) {
       dropdownContent.classList.add('active');
       dropdownTrigger.classList.add('active');
     }
   });
-  
+
   dropdownItems.forEach(item => {
-    item.addEventListener('click', function() {
+    item.addEventListener('click', function () {
       const variantId = this.getAttribute('data-id');
       const variantTitle = this.getAttribute('data-value');
       const variantPrice = this.getAttribute('data-price');
-      
+
       selectedOption.textContent = variantTitle;
       selectedPrice.textContent = variantPrice;
 
@@ -116,12 +116,12 @@ document.addEventListener('DOMContentLoaded', function() {
       product.setAttribute('data-product-name', variantTitle);
 
 
-      
+
       dropdownItems.forEach(item => item.classList.remove('selected'));
       this.classList.add('selected');
-      
+
       closeDropdown();
-      
+
       const event = new CustomEvent('variantSelected', {
         detail: {
           variant: variantTitle,
@@ -131,24 +131,24 @@ document.addEventListener('DOMContentLoaded', function() {
       document.dispatchEvent(event);
     });
   });
-  
-  document.addEventListener('click', function(e) {
+
+  document.addEventListener('click', function (e) {
     if (!dropdownTrigger.contains(e.target) && !dropdownContent.contains(e.target)) {
       closeDropdown();
     }
   });
-  
-  document.addEventListener('keydown', function(e) {
+
+  document.addEventListener('keydown', function (e) {
     if (e.key === 'Escape') {
       closeDropdown();
     }
   });
-  
+
   function closeDropdown() {
     dropdownContent.classList.remove('active');
     dropdownTrigger.classList.remove('active');
   }
-  
+
   function closeAllDropdowns() {
     document.querySelectorAll('.dropdown-content.active').forEach(dropdown => {
       dropdown.classList.remove('active');
@@ -157,36 +157,36 @@ document.addEventListener('DOMContentLoaded', function() {
       trigger.classList.remove('active');
     });
   }
-  
+
   if (dropdownItems.length > 0) {
     dropdownItems[0].classList.add('selected');
   }
 });
 
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
   const tabContainer = document.querySelector('.custom__product-detail');
   const tabs = document.querySelectorAll('.custom__product-detail-tabs li');
   const tabContents = document.querySelectorAll('.custom__product-detail-content');
-  
+
   function switchTab(tabIndex) {
     tabs.forEach(tab => tab.classList.remove('active'));
     tabContents.forEach(content => content.classList.remove('active'));
-    
+
     tabs[tabIndex].classList.add('active');
     tabContents[tabIndex].classList.add('active');
-    
+
     const tabId = tabs[tabIndex].id;
     history.replaceState(null, null, `#${tabId}`);
   }
-  
+
   tabs.forEach((tab, index) => {
-    tab.addEventListener('click', function(e) {
+    tab.addEventListener('click', function (e) {
       e.preventDefault();
       switchTab(index);
     });
   });
-  
+
   function checkHash() {
     const hash = window.location.hash.substring(1);
     if (hash) {
@@ -200,11 +200,43 @@ document.addEventListener('DOMContentLoaded', function() {
       switchTab(0);
     }
   }
-  
+
   checkHash();
-  
+
   window.addEventListener('hashchange', checkHash);
 });
 
 
 // Add to cart functionality
+
+const add_cart_btn = document.getElementById("add_cart");
+add_cart_btn.addEventListener('click', function () {
+  const add_cart_input = document.getElementById('custom_product');
+  const variantId = add_cart_input.getAttribute('data-product-id');
+
+  let formData = {
+    'items': [{
+      'id': parseInt(variantId),
+      'quantity': 1
+    }]
+  }
+
+
+  fetch(window.Shopify.routes.root + 'cart/add.js', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(formData)
+  })
+    .then(response => {
+      return response.json();
+      console.log(response.json()).json();
+      
+    })
+    .catch((error) => {
+      console.error('Error:', error);
+    });
+    
+
+})
