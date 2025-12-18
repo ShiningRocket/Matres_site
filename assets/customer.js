@@ -111,6 +111,10 @@ document.addEventListener('DOMContentLoaded', function() {
       selectedOption.textContent = variantTitle;
       selectedPrice.textContent = variantPrice;
 
+      product.setAttribute('data-product-id', variantId);
+      product.setAttribute('data-product-price', variantPrice);
+      product.setAttribute('data-product-name', variantTitle);
+
 
       
       dropdownItems.forEach(item => item.classList.remove('selected'));
