@@ -65,13 +65,13 @@ body {
     align-items: flex-start;
     margin: auto;
     flex-wrap: wrap;
+    gap: 24px;
 }
 
 .custom__featured-product-media {
     display: flex;
     flex-direction: column;
     gap: 8px;
-    margin-right: 3.5rem;
 }
 
 .custom__featured-product-media .custom__product-main-media {
@@ -581,6 +581,7 @@ body {
     font-style: normal;
     font-weight: 700;
     line-height: 105%;
+    cursor: pointer;
 }
 
 .custom__price-check {
@@ -1017,6 +1018,7 @@ body {
     justify-content: space-between;
     align-items: flex-start;
     width: 100%;
+    flex-wrap: wrap;
 }
 
 .custom_faq-accordion {
@@ -1084,9 +1086,10 @@ body {
 
 .custom_consult-wrapper {
     display: flex;
-    align-items: flex-start;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    width: 100%;
     gap: 24px;
-    align-self: stretch;
 }
 
 .custom_consult-card {
@@ -1389,6 +1392,7 @@ footer .footer-inner {
     .custom-button {
         padding: 12px 14px;
         font-size: 14px;
+        cursor: pointer;
     }
 
     .custom-section-title {

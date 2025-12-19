@@ -216,11 +216,13 @@ add_cart_btn.addEventListener('click', function () {
 
   let formData = {
     'items': [{
-      'id': parseInt(variantId),
+      'id': variantId,
       'quantity': 1
     }]
-  }
+  };
 
+  console.log(formData);
+  
 
   fetch(window.Shopify.routes.root + 'cart/add.js', {
     method: 'POST',
@@ -231,12 +233,9 @@ add_cart_btn.addEventListener('click', function () {
   })
     .then(response => {
       return response.json();
-      console.log(response.json()).json();
-      
     })
     .catch((error) => {
       console.error('Error:', error);
     });
-    
 
 })
