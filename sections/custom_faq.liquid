@@ -1,6 +1,9 @@
 {% if section.settings != blank %}
   <div class="custom_featured-product--wrapper custom-section-structure">
     <div class="custom_faq-container">
+      <div class="custom_faq-media">
+        <img src="{{section.settings.image |  image_url: width: 1000}}" width="" height="" alt="">
+      </div>
       <div class="custom_faq-accordion">
         <h2 class="custom-section-title">{{ section.settings.section_title }}</h2>
         {% if section.blocks != blank %}
@@ -18,9 +21,6 @@
             {% endfor %}
           </div>
         {% endif %}
-      </div>
-      <div class="custom_faq-media">
-        <img src="{{section.settings.image |  image_url: width: 1000}}" width="" height="" alt="">
       </div>
     </div>
   </div>

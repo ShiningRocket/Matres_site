@@ -679,7 +679,6 @@ body {
 
 .custom-img-text-media {
     width: 52%;
-    height: 525px;
     flex-shrink: 0;
 }
 
@@ -1019,6 +1018,7 @@ body {
     align-items: flex-start;
     width: 100%;
     flex-wrap: wrap;
+    flex-direction: row-reverse;
 }
 
 .custom_faq-accordion {
@@ -1172,7 +1172,6 @@ footer .footer-inner {
 
     .custom-img-text-media {
         width: 100%;
-        height: 400px;
     }
 
     .trusted-review-card-container {
@@ -1181,6 +1180,13 @@ footer .footer-inner {
 
     .trusted-review-card {
         min-width: calc(50% - 8px);
+    }
+
+    .custom_faq-accordion {
+        width: 100%;
+    }
+    .custom_faq-media {
+        width: 100%;
     }
 }
 
@@ -1264,10 +1270,6 @@ footer .footer-inner {
     .custom-img-with-text-wrapper h2 {
         font-size: 28px;
         letter-spacing: -0.56px;
-    }
-
-    .custom-img-text-media {
-        height: 300px;
     }
 
     .custom-img-text_text h3 {
@@ -1433,6 +1435,9 @@ footer .footer-inner {
     .custom__product-additional-media img {
         width: calc(33.333% - 6px);
         max-width: 120px;
+    }
+    .footer-links {
+        text-align: center;
     }
 }
 
